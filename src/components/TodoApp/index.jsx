@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { AppBar, Paper, Toolbar, Typography } from "@mui/material";
+import { AppBar, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import TodoList from "../TodoList";
 import TodoForm from "../TodoForm";
 
@@ -13,6 +13,10 @@ const PaperStyle = {
 
 const AppBarStyle = {
   height: "64px",
+};
+
+const GridContainerStyle = {
+  marginTop: "1rem",
 };
 
 function TodoApp() {
@@ -34,8 +38,12 @@ function TodoApp() {
           <Typography color="inherit">Todos</Typography>
         </Toolbar>
       </AppBar>
-      <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} />
+      <Grid sx={GridContainerStyle} container justifyContent="center">
+        <Grid item xs={11} md={8} lg={4}>
+          <TodoForm addTodo={addTodo} />
+          <TodoList todos={todos} />
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
