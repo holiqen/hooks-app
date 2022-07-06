@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppBar, Paper, Toolbar, Typography } from "@mui/material";
 import TodoList from "../TodoList";
+import TodoForm from "../TodoForm";
 
 const PaperStyle = {
   padding: 0,
@@ -22,6 +23,10 @@ function TodoApp() {
   ];
   const [todos, setTodos] = useState(initialTodos);
 
+  const addTodo = (newTaskText) => {
+    setTodos([...todos, { id: uuidv4(), task: newTaskText, completed: false }]);
+  };
+
   return (
     <Paper sx={PaperStyle} elevation={0}>
       <AppBar sx={AppBarStyle} color="primary" position="static">
@@ -29,6 +34,7 @@ function TodoApp() {
           <Typography color="inherit">Todos</Typography>
         </Toolbar>
       </AppBar>
+      <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} />
     </Paper>
   );
