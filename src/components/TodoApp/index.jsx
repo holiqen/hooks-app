@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppBar, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import TodoList from "../TodoList";
 import TodoForm from "../TodoForm";
+import useTodosState from "../../hooks/useTodosState";
 
 const PaperStyle = {
   padding: 0,
   margin: 0,
   height: "100vh",
   backgroundColor: "#fafafa",
+  overflow: "scroll",
 };
 
 const AppBarStyle = {
@@ -20,36 +22,12 @@ const GridContainerStyle = {
 };
 
 function TodoApp() {
-  const initialTodos = JSON.parse(window.localStorage.getItem("todos")) || [
+  const initialTodos = [
     { id: uuidv4(), task: "Clean my room", completed: false },
     { id: uuidv4(), task: "Wash car", completed: true },
     { id: uuidv4(), task: "Find job", completed: false },
   ];
-
-  const [todos, setTodos] = useState(initialTodos);
-
-  useEffect(() => {
-    window.localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const addTodo = (newTaskText) => {
-    setTodos([...todos, { id: uuidv4(), task: newTaskText, completed: false }]);
-  };
-
-  const removeTodo = (todoId) => {
-    const updateTodos = todos.filter((todo) => todo.id !== todoId);
-    setTodos(updateTodos);
-  };
-
-  const toggleTodo = (todoId) => {
-    const updateTodos = todos.map((todo) => (todo.id === todoId ? { ...todo, completed: !todo.completed } : todo));
-    setTodos(updateTodos);
-  };
-
-  const editTodo = (todoId, newTaskText) => {
-    const updateTodos = todos.map((todo) => (todo.id === todoId ? { ...todo, task: newTaskText } : todo));
-    setTodos(updateTodos);
-  };
+  const { todos, addTodo, removeTodo, toggleTodo, editTodo } = useTodosState(initialTodos);
 
   return (
     <Paper sx={PaperStyle} elevation={0}>

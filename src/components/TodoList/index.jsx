@@ -9,18 +9,17 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
       <Paper>
         <List>
           {todos.map((todo, index) => (
-            <>
+            <React.Fragment key={todo.id}>
               <TodoItem
                 id={todo.id}
                 task={todo.task}
-                key={todo.id}
                 completed={todo.completed}
                 removeTodo={removeTodo}
                 toggleTodo={toggleTodo}
                 editTodo={editTodo}
               />
               {index < todos.length - 1 && <Divider />}
-            </>
+            </React.Fragment>
           ))}
         </List>
       </Paper>
@@ -37,7 +36,7 @@ TodoList.propTypes = {
       id: PropTypes.string.isRequired,
       task: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
-    })
+    }).isRequired
   ).isRequired,
   removeTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
