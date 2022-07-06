@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Divider, List, Paper } from "@mui/material";
 import TodoItem from "../TodoItem";
 
-function TodoList({ todos, removeTodo, toggleTodo }) {
+function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
   return (
     <Paper>
       <List>
@@ -16,6 +16,7 @@ function TodoList({ todos, removeTodo, toggleTodo }) {
               completed={todo.completed}
               removeTodo={removeTodo}
               toggleTodo={toggleTodo}
+              editTodo={editTodo}
             />
             <Divider />
           </>
@@ -37,4 +38,5 @@ TodoList.propTypes = {
   ).isRequired,
   removeTodo: PropTypes.func.isRequired,
   toggleTodo: PropTypes.func.isRequired,
+  editTodo: PropTypes.func.isRequired,
 };
