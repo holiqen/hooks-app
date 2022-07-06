@@ -13,8 +13,16 @@ function EditTodoForm({ id, task, editTodo, toggleEditForm }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField value={value} onChange={handleChange} margin="normal" label="Edit todo" fullWidth variant="standard" />
+    <form onSubmit={handleSubmit} style={{ marginLeft: "1 rem", width: "100%" }}>
+      <TextField
+        value={value}
+        onChange={handleChange}
+        margin="normal"
+        label="Edit todo"
+        fullWidth
+        variant="standard"
+        autoFocus
+      />
     </form>
   );
 }
