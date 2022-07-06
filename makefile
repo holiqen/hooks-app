@@ -1,0 +1,2 @@
+eslint:
+	npm run eslint
