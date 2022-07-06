@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { AppBar, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import TodoList from "../TodoList";
@@ -20,12 +20,17 @@ const GridContainerStyle = {
 };
 
 function TodoApp() {
-  const initialTodos = [
+  const initialTodos = JSON.parse(window.localStorage.getItem("todos")) || [
     { id: uuidv4(), task: "Clean my room", completed: false },
     { id: uuidv4(), task: "Wash car", completed: true },
     { id: uuidv4(), task: "Find job", completed: false },
   ];
+
   const [todos, setTodos] = useState(initialTodos);
+
+  useEffect(() => {
+    window.localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const addTodo = (newTaskText) => {
     setTodos([...todos, { id: uuidv4(), task: newTaskText, completed: false }]);
@@ -50,7 +55,7 @@ function TodoApp() {
     <Paper sx={PaperStyle} elevation={0}>
       <AppBar sx={AppBarStyle} color="primary" position="static">
         <Toolbar>
-          <Typography color="inherit">Todos</Typography>
+          <Typography color="inherit">HOOKS TODOS</Typography>
         </Toolbar>
       </AppBar>
       <Grid sx={GridContainerStyle} container justifyContent="center">
