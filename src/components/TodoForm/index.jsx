@@ -2,11 +2,7 @@ import React from "react";
 import { Paper, TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import useInputState from "../../hooks/useInputState";
-
-const PaperStyle = {
-  margin: "1rem 0",
-  padding: "0 1rem",
-};
+import PaperStyle from "./style";
 
 function TodoForm({ addTodo }) {
   const [value, handleChange, reset] = useInputState("");

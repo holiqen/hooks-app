@@ -4,22 +4,7 @@ import { AppBar, Grid, Paper, Toolbar, Typography } from "@mui/material";
 import TodoList from "../TodoList";
 import TodoForm from "../TodoForm";
 import useTodosState from "../../hooks/useTodosState";
-
-const PaperStyle = {
-  padding: 0,
-  margin: 0,
-  height: "100vh",
-  backgroundColor: "#fafafa",
-  overflow: "scroll",
-};
-
-const AppBarStyle = {
-  height: "64px",
-};
-
-const GridContainerStyle = {
-  marginTop: "1rem",
-};
+import { AppBarStyle, GridContainerStyle, PaperStyle } from "./style";
 
 function TodoApp() {
   const initialTodos = [
