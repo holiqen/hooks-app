@@ -1,23 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import { Divider, List, Paper } from "@mui/material";
 import TodoItem from "../TodoItem";
+import { TodosContext } from "../../context/todos.context";
 
-function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
+function TodoList() {
+  const todos = useContext(TodosContext);
+
   if (todos.length)
     return (
       <Paper>
         <List>
           {todos.map((todo, index) => (
             <React.Fragment key={todo.id}>
-              <TodoItem
-                id={todo.id}
-                task={todo.task}
-                completed={todo.completed}
-                removeTodo={removeTodo}
-                toggleTodo={toggleTodo}
-                editTodo={editTodo}
-              />
+              <TodoItem id={todo.id} task={todo.task} completed={todo.completed} />
               {index < todos.length - 1 && <Divider />}
             </React.Fragment>
           ))}
@@ -29,16 +24,3 @@ function TodoList({ todos, removeTodo, toggleTodo, editTodo }) {
 }
 
 export default TodoList;
-
-TodoList.propTypes = {
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      task: PropTypes.string.isRequired,
-      completed: PropTypes.bool.isRequired,
-    }).isRequired
-  ).isRequired,
-  removeTodo: PropTypes.func.isRequired,
-  toggleTodo: PropTypes.func.isRequired,
-  editTodo: PropTypes.func.isRequired,
-};

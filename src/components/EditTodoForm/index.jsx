@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { TextField } from "@mui/material";
 import PropTypes from "prop-types";
 import useInputState from "../../hooks/useInputState";
+import { DispatchContext } from "../../context/todos.context";
 
-function EditTodoForm({ id, task, editTodo, toggleEditForm }) {
+function EditTodoForm({ id, task, toggleEditForm }) {
+  const dispatch = useContext(DispatchContext);
   const [value, handleChange, reset] = useInputState(task);
   const handleSubmit = (e) => {
     e.preventDefault();
-    editTodo(id, value);
+    dispatch({ type: "EDIT", id, newTask: value });
     reset();
     toggleEditForm();
   };
@@ -32,6 +34,5 @@ export default EditTodoForm;
 EditTodoForm.propTypes = {
   id: PropTypes.string.isRequired,
   task: PropTypes.string.isRequired,
-  editTodo: PropTypes.func.isRequired,
   toggleEditForm: PropTypes.func.isRequired,
 };

@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Paper, TextField } from "@mui/material";
-import PropTypes from "prop-types";
 import useInputState from "../../hooks/useInputState";
 import PaperStyle from "./style";
+import { DispatchContext } from "../../context/todos.context";
 
-function TodoForm({ addTodo }) {
+function TodoForm() {
+  const dispatch = useContext(DispatchContext);
   const [value, handleChange, reset] = useInputState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(value);
+    dispatch({ type: "ADD", task: value });
     reset();
   };
 
@@ -29,7 +30,3 @@ function TodoForm({ addTodo }) {
 }
 
 export default TodoForm;
-
-TodoForm.propTypes = {
-  addTodo: PropTypes.func.isRequired,
-};
